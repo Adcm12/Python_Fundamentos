@@ -1,7 +1,7 @@
 #Realizando importaciones de bibliotecas
 #Por padrao, elas seran importadas en el comienzo
 #do archivos/programas.py
-
+import time
 import os
 
 # 3Sirve para enviar comando al terminal entre otras funciones
@@ -34,3 +34,20 @@ print(f'\nDatos de las variables de tipo float\n{salario}')
 verdade: bool = True
 
 print(f'\nDatos de las variables de tipo bool\n {verdade}')
+
+lista: list = [
+    numero_entero1,
+    numero_entero2,
+    salario,
+    verdade
+]
+
+time.sleep(3)
+
+os.system('cls')
+
+print(f'\nDatos de la lista: {lista[1]}')
+
+for item in lista:
+    print('\n', item)
+
