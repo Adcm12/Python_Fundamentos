@@ -9,7 +9,6 @@ def mostrar_dados():
     print('Float: ', 5.2)
     print('Boolean: ', True)    
 
-
 # Solo va a rodar la funcion que llama al final (sirve para hacer testes sin llamar todo el codigo)
 if __name__ == '__main__':
 
