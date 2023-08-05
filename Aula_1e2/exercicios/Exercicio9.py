@@ -27,7 +27,7 @@ def convertir_a_dolar():
 
 while True:
 
-    os.system('cls')
+    # 
 
     seleccion= int(input('''Seleccione una opcion: 
                          \n1) Convertir de Dolar a Real 
@@ -46,7 +46,7 @@ while True:
 
     else:
         os.system('cls')
-        print('Digite una opcion valida')
+        print('Digite una opcion valida!!!!!\n')
 
 
 # if __name__ == '__main__':
