@@ -9,7 +9,7 @@ def convertir_hora():
 
     hora=int(input("Digite la cantidad de horas: "))
     minuto=(hora*60)
-    print (f'{hora} horas convertida a minutos: {minuto}\n')
+    print (f'\n\033[034mA {hora} horas convertida a minutos: {minuto}\n \033[0m')
 
     segundo=(hora*3600)
     print (f'{hora} horas convertida a segundos: {segundo}\n')
