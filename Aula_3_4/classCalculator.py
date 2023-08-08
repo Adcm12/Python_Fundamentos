@@ -10,19 +10,19 @@ class Calculadora:
     input_mensage += '\n6 = Salir\n: '
 
     def sumar(numero1, numero2):
-        print(f'La suma de los numeros es: {numero1 + numero2}\n')
+        print(f'\033[034mA La suma de los numeros es: {numero1 + numero2}\n \033[0m')
 
     def restar(numero1, numero2):
-        print(f'La resta de los numeros es: {numero1 - numero2}\n')
+        print(f'\31[030m La resta de los numeros es: {numero1 - numero2}\n\33[0m')
 
     def multiplicar(numero1, numero2):
-        print(f'La multiplicacion de los numeros es: {numero1 * numero2}\n')
+        print(f'\34[030m La multiplicacion de los numeros es: {numero1 * numero2}\n\33[0m')
 
     def division(numero1, numero2):
-        print(f'La Division de los numeros es: {numero1 / numero2}\n')
+        print(f'\35[030m La Division de los numeros es: {numero1 / numero2}\n\33[0m')
 
     def modulo(numero1, numero2):
-        print(f'El modulo de los numeros es: {numero1 % numero2}\n')
+        print(f'\36[030m El modulo de los numeros es: {numero1 % numero2}\n\33[0m')
 
     def controle_operaciones():
         contador = 0
@@ -44,18 +44,23 @@ class Calculadora:
 
                             if opcion == 1:
                                 Calculadora.sumar(numero_1, numero_2)
+                                break
 
                             elif opcion == 2:
                                 Calculadora.restar(numero_1, numero_2)
+                                break
 
                             elif opcion == 3:
                                 Calculadora.multiplicar(numero_1, numero_2)
+                                break
 
                             elif opcion == 4:
                                 Calculadora.division(numero_1, numero_2)
+                                break
 
                             elif opcion == 5:
                                 Calculadora.modulo(numero_1, numero_2)
+                                break
                             
                             elif opcion == 6:
                                 break
@@ -67,7 +72,12 @@ class Calculadora:
                 else:
                     print('Informe numeros positivos')
 
+            except KeyboardInterrupt:
+                quit()
             except:
                 print("Error")
+
+
+    
 
 Calculadora.controle_operaciones()
