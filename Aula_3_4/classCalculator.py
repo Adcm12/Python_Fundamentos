@@ -1,23 +1,29 @@
 class Calculadora:
 
     operaciones_limite = 10
-    input_mensage = 'informe un numero entre 1 y 5: '
+    input_mensage = '\ninforme un numero entre 1 y 5: \n'
     input_mensage += '\n1 = Sumar'
     input_mensage += '\n2 = Restarr'
     input_mensage += '\n3 = multiplicarr'
     input_mensage += '\n4 = Dividir'
     input_mensage += '\n5 = Modulo'
+    input_mensage += '\n6 = Salir\n: '
 
-    def sumar():
-        ...
-    def restar():
-        ...
-    def multiplicar():
-        ...
-    def division():
-        ...
-    def modulo():
-        ...
+    def sumar(numero1, numero2):
+        print(f'La suma de los numeros es: {numero1 + numero2}\n')
+
+    def restar(numero1, numero2):
+        print(f'La resta de los numeros es: {numero1 - numero2}\n')
+
+    def multiplicar(numero1, numero2):
+        print(f'La multiplicacion de los numeros es: {numero1 * numero2}\n')
+
+    def division(numero1, numero2):
+        print(f'La Division de los numeros es: {numero1 / numero2}\n')
+
+    def modulo(numero1, numero2):
+        print(f'El modulo de los numeros es: {numero1 % numero2}\n')
+
     def controle_operaciones():
         contador = 0
 
@@ -50,6 +56,9 @@ class Calculadora:
 
                             elif opcion == 5:
                                 Calculadora.modulo(numero_1, numero_2)
+                            
+                            elif opcion == 6:
+                                break
 
                             else: 
                                 ValueError()                           
@@ -60,3 +69,5 @@ class Calculadora:
 
             except:
                 print("Error")
+
+Calculadora.controle_operaciones()
