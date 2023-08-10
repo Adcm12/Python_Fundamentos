@@ -36,7 +36,7 @@ class Triangulo:
 
             print('\nEl triagulo es equilatero')
         
-        elif self.lado1 == self.lado2 or self.lado1 == self.lado3:
+        elif self.lado1 == self.lado2 or self.lado1 == self.lado3 or self.lado2 == self.lado3:
 
             print('\nEl triangulo es Isosceles')
 
@@ -46,6 +46,9 @@ class Triangulo:
 
 if __name__=='__main__':
 
-    self1 = Triangulo(lado1 = 4.6, lado2 = 7.8, lado3 = 5.6)
-
+    self1 = Triangulo(lado1 = 5, lado2 = 4.6, lado3 = 4.6)
     self1.tipo_triangulo()
+    self2 = Triangulo(lado1 = 4.6, lado2 = 5, lado3 = 4.6)
+    self2.tipo_triangulo()
+    self3 = Triangulo(lado1 = 5, lado2 = 5, lado3 = 4.6)
+    self3.tipo_triangulo()
