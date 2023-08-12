@@ -71,4 +71,4 @@ print(leon.razas, leon.cor, leon.edad, leon.nome)
 print(gato.razas, gato.cor, gato.edad, gato.nome)
 print(pantera.razas, pantera.cor, pantera.edad, pantera.nome)
 
-print(pantera.nome)
+
