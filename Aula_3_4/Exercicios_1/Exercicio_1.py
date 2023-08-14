@@ -27,14 +27,11 @@ class Producto():
         return f'\nPreço:  {self.preço}'
     
     
-    @property
     def get_codigo(self):
 
         return f'\nCodigo: {self.codigo}'
 
 
-    #Setters
-    @get_preço.setter
     def set_preço(self, preço_novo):
 
         print(f'Setou de {self.preço}, para {preço_novo}')
@@ -48,7 +45,7 @@ if __name__=='__main__':
     producto3 = Producto('Notebook', 8560, 3)      
     producto4 = Producto('Tv', 2000, 4)      
 
-    print(producto1.nome, producto1.get_preço, producto1.get_codigo)
-    print(producto2.nome, producto2.get_preço, producto2.get_codigo)
-    print(producto3.nome, producto3.get_preço, producto3.get_codigo)
-    print(producto4.nome, producto4.get_preço, producto4.get_codigo)
+    print(producto1.nome, producto1.get_preço, producto1.get_codigo())
+    print(producto2.nome, producto2.get_preço, producto2.get_codigo())
+    print(producto3.nome, producto3.get_preço, producto3.get_codigo())
+    print(producto4.nome, producto4.get_preço, producto4.get_codigo())
