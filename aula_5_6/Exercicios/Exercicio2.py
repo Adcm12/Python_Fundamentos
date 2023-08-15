@@ -11,13 +11,6 @@ from abc import ABC, abstractmethod
 
 class Banco():
 
-    def __init__(self, nome, saldo, numero_conta):
-
-        self.__nome = nome
-        self._saldo = saldo
-        self.numero_conta = numero_conta
-
-
     @abstractmethod
     def depositar(self):
         pass
@@ -25,9 +18,7 @@ class Banco():
 
     @abstractmethod
     def ver_saldo(self):
-
-        print(f'\nTitular: {self.__nome} \nSaldo: {self._saldo} \nNumero de cuenta: {self.numero_conta}')
-    
+        pass
 
     @abstractmethod
     def sacar(self):
@@ -36,13 +27,27 @@ class Banco():
 
 class ContaPopança(Banco):
 
+    def __init__(self, nome, saldo, numero_conta):
+
+        self.__nome = nome
+        self._saldo = saldo
+        self.numero_conta = numero_conta
+
+
     def depositar(self, dinero):
+
         print(f'\nUsted depositó {dinero}$ correctamente!!!')
 
-    
+
+    def intereses(self, dinero):
+
+        interes = 0.1
+        print(f'\nGanara un 10% por cada deposito recibido. \nPor el deposito de {dinero} recibira: {(dinero * interes)}')
+
+
     @property
     def ver_saldo(self):
-        print(f'\nTitular: {self._Banco__nome} \nSaldo: {self._saldo} \nNumero de cuenta: {self.numero_conta}')
+        print(f'\nTitular: {self.__nome} \nSaldo: {self._saldo} \nNumero de cuenta: {self.numero_conta}')
 
 
     def sacar(self):
@@ -50,6 +55,13 @@ class ContaPopança(Banco):
 
 
 class ContaCorrente(Banco):
+
+    def __init__(self, nome, saldo, numero_conta):
+
+        self.__nome = nome
+        self._saldo = saldo
+        self.numero_conta = numero_conta
+
 
     def depositar(self, dinero):
         print(f'\nUsted depositó {dinero}$ correctamente!!!')
@@ -60,7 +72,7 @@ class ContaCorrente(Banco):
 
     @property
     def ver_saldo(self):
-        print(f'\nTitular: {self._Banco__nome} \nSaldo: {self._saldo} \nNumero de cuenta: {self.numero_conta}')
+        print(f'\nTitular: {self.__nome} \nSaldo: {self._saldo} \nNumero de cuenta: {self.numero_conta}')
 
 
     def sacar(self, dinero):
@@ -72,6 +84,7 @@ pessoa1 = ContaPopança('Adrian Castillo', 1500, 524987)
 pessoa1.ver_saldo
 pessoa1.depositar(1500)
 pessoa1.sacar()
+pessoa1.intereses(1500)
 
 
 pessoa2 = ContaCorrente('David Marcano', 500, 618463)
