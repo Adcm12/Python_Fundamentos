@@ -25,13 +25,12 @@ class Vehiculo():
 
 class Carro(Vehiculo):
 
-    ligado = False
 
     def ligar(self):
 
-        if not Carro.ligado:
+        if not self.ligado:
 
-            Carro.ligado = True
+            self.ligado = True
 
             time.sleep(1.5)
 
@@ -42,9 +41,9 @@ class Carro(Vehiculo):
 
     def desligar(self):
 
-        if Carro.ligado:
+        if self.ligado:
 
-            Carro.ligado = False
+            self.ligado = False
 
             time.sleep(1.5)
 
@@ -56,13 +55,12 @@ class Carro(Vehiculo):
 
 class Moto(Vehiculo):
 
-    ligado = False
 
     def ligar(self):
 
-        if not Moto.ligado:
+        if not self.ligado:
 
-            Moto.ligado = True
+            self.ligado = True
 
             time.sleep(1.5)
 
@@ -73,9 +71,9 @@ class Moto(Vehiculo):
 
     def desligar(self):
 
-        if Moto.ligado:
+        if self.ligado:
 
-            Moto.ligado = False
+            self.ligado = False
 
             time.sleep(1.5)
 
