@@ -101,10 +101,16 @@ class Garagem:
         
     def listar_veiculos(self):
 
-        print("\n\U0001F4CB Veículos na garagem:")
+        if len(self._veiculos):
 
-        for veiculo in self._veiculos:
-            print(f"\n  \u2714 {veiculo.marca} {veiculo.modelo}")
+            print("\n\U0001F4CB Veículos na garagem:")
+
+            for veiculo in self._veiculos:
+                print(f"\n  \u2714 {veiculo.marca} {veiculo.modelo}")
+        
+        else: 
+
+            print('El garagem esta vacio')
             
 
     @property
