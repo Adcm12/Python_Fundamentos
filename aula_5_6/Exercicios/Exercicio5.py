@@ -3,6 +3,7 @@
 # uma lista de alimentos e calcula o total de calorias usando polimorfismo. Para mais precisão no
 # exercício, é ideal pesquisar as calorias dos alimentos e criar objetos das subclasses com seus 
 # respectivos construtores e atributos.
+
 from abc import ABC, abstractmethod
 
 class Alimento:

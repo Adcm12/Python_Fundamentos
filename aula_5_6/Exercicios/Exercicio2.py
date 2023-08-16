@@ -36,7 +36,15 @@ class ContaPopança(Banco):
 
     def depositar(self, dinero):
 
-        print(f'\nUsted depositó {dinero}$ correctamente!!!')
+        if dinero > 0:
+
+            self._saldo += dinero
+
+            print(f'\nUsted depositó {dinero}$ correctamente!!!')
+
+        else:
+
+            print('Informe un valor encima de cero')
 
 
     def intereses(self, dinero):
@@ -64,7 +72,16 @@ class ContaCorrente(Banco):
 
 
     def depositar(self, dinero):
-        print(f'\nUsted depositó {dinero}$ correctamente!!!')
+
+        if dinero >= 50 and dinero <=200 :
+
+            self._saldo += dinero
+
+            print(f'\nUsted depositó {dinero}$ correctamente!!!')
+
+        else:
+
+            print('Informe un valor encima de cero')
 
     def cartao_credito(self, limite):
 
@@ -76,9 +93,13 @@ class ContaCorrente(Banco):
 
 
     def sacar(self, dinero):
+
+        self._saldo -= dinero
+
         print(f'\nUsted retiro {dinero}$ correctamente!!!')    
 
 
+print('\n---->  Cuenta Poupança!  <----\n')
 pessoa1 = ContaPopança('Adrian Castillo', 1500, 524987)
 
 pessoa1.ver_saldo
@@ -87,11 +108,13 @@ pessoa1.sacar()
 pessoa1.intereses(1500)
 
 
+print('\n---->  Cuenta Corrente!  <----\n')
 pessoa2 = ContaCorrente('David Marcano', 500, 618463)
 
 pessoa2.ver_saldo
 pessoa2.cartao_credito(500)
 pessoa2.depositar(200)
 pessoa2.sacar(666)
+pessoa2.ver_saldo
 
 
