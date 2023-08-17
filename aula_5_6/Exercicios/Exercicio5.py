@@ -77,3 +77,5 @@ alimentos = [fruta1, legume1, carne1]
 
 total_calorias = calcular_total_calorias(alimentos)
 print("\nTotal de calorias:", total_calorias)
+
+
