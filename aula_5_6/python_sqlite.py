@@ -63,14 +63,15 @@ class BancoDeDados():
         conn = BancoDeDados.crear_conexion('base_de_datos.db')
 
         menu = '''
-                1 - Crear tabela
-                2 - Inserir datos
-                3 - Deletar linha
-                4 - Mostrar tabela
-                5 - Actualizar linha
-                6 - Salir: '''
+                \n1 - Crear tabela
+                \n2 - Inserir datos
+                \n3 - Deletar linha
+                \n4 - Mostrar tabela
+                \n5 - Actualizar linha
+                \n6 - Salir: '''
         while True :
             try:
+                os.system('cls')
                 operacio = int(input(menu))
 
                 if operacio == 1:
