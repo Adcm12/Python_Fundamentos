@@ -48,17 +48,26 @@ class BancoDeDados():
         WHERE id = ?;
         '''
         cursor.execute(sql, (id_linha,))
+        num_filas_deletadas = cursor.rowcount
         BancoDeDados.conexion.commit()
         cursor.close()
-        print('ID eliminado con éxito')
+
+        if num_filas_deletadas > 0:
+            print('Línea eliminada con éxito')
+        else:
+            print('No se encontró ninguna línea con ese ID')
 
     @staticmethod
     def mostar_tabela(nome_tabela):
         cursor = BancoDeDados.conexion.cursor()
         cursor.execute(f'SELECT * FROM {nome_tabela}')
         rows = cursor.fetchall()
-        for row in rows:
-            print(row)
+
+        if rows:
+            for row in rows:
+                print(row)
+        else:
+            print('\nLa tabla está vacía.')
         cursor.close()
 
     @staticmethod
@@ -71,7 +80,7 @@ class BancoDeDados():
         '''
         cursor.execute(sql, (nome_novo, numero_novo, email_novo, id_linha))
         BancoDeDados.conexion.commit()
-        print('\nDatos actualizados con exito!')
+        print('\n Datos actualizados con exito!')
         cursor.close()
 
     @staticmethod
@@ -136,5 +145,5 @@ class BancoDeDados():
         print('Conexión cerrada')
 
 if __name__ == '__main__':
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
     BancoDeDados.database_manager()
