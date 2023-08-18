@@ -14,6 +14,7 @@
 # usuário que insira nome, idade e nota e, em seguida, chame o método criar_aluno(). Na opção "Buscar Aluno por ID", peça ao usuário para inserir
 # um ID e exiba os detalhes do aluno correspondente usando o método buscar_aluno_por_id(). Na opção "Listar Alunos", liste todos os alunos usando o
 # método listar_alunos(). Ao sair do loop principal, feche a conexão com o banco de dados.
+
 import os
 import sqlite3
 
