@@ -20,7 +20,7 @@ class Aluno(Pessoa):
         self.matricula = matricula
 
     def exibir_info(self):
-        print(f"Nome: {self.nome}, Idade: {self.idade}, Matrícula: {self.matricula}")
+        print(f"\nNome: {self.nome}, Idade: {self.idade}, Matrícula: {self.matricula}")
 
     def calcular_salario(self):
         pass
@@ -33,26 +33,27 @@ class Professor(Pessoa):
         self.valor_por_hora = valor_por_hora
     
     def exibir_info(self):
-        print(f"Nome: {self.nome}, Idade: {self.idade}, Disciplina: {self.disciplina}")
+        print(f"\nNome: {self.nome}, Idade: {self.idade}, Disciplina: {self.disciplina}")
 
     def calcular_salario(self):
         salario = self.carga_horaria * self.valor_por_hora
         return salario
 
 def adicionar_pessoa():
-    tipo = input("Digite 'aluno' para adicionar um aluno, ou 'professor' para adicionar um professor: ")
-    nome = input("Digite o nome da pessoa: ")
+    tipo = input("\nDigite 'alumno' para adicionar um alumno, ou 'profesor' para adicionar um profesor: ")
+    nome = input("\nDigite o nome da pessoa: ")
     idade = int(input("Digite a idade da pessoa: "))
     
-    if tipo == 'aluno':
+    if tipo == 'alumno':
         matricula = input("Digite o número de matrícula do aluno: ")
         aluno = Aluno(nome, idade, matricula)
         salario = None
         info_extra = matricula
-    elif tipo == 'professor':
-        disciplina = input("Digite a disciplina lecionada pelo professor: ")
-        carga_horaria = int(input("Digite a carga horária do professor: "))
-        valor_por_hora = float(input("Digite o valor por hora do professor: "))
+
+    elif tipo == 'profesor':
+        disciplina = input("Digite a disciplina lecionada pelo profesor: ")
+        carga_horaria = int(input("Digite a carga horária do profesor: "))
+        valor_por_hora = float(input("Digite o valor por hora do profesor: "))
         professor = Professor(nome, idade, disciplina, carga_horaria, valor_por_hora)
         salario = professor.calcular_salario()
         info_extra = disciplina
@@ -82,7 +83,7 @@ def listar_pessoas():
         elif tipo == 'professor':
             print(f"\nProfessor: \nNome: {nome}, Idade: {idade}, Disciplina: {info_extra}, Salário: {salario}")
 
-    conn.close()
+    # conn.close()
 
 conn = sqlite3.connect("pessoas.db")
 cursor = conn.cursor()
@@ -99,11 +100,14 @@ cursor.execute('''
 ''')
 
 conn.commit()
-conn.close()
+
 
 while True:
+    conn = sqlite3.connect("pessoas.db")
+    cursor = conn.cursor()
     adicionar_pessoa()
     listar_pessoas()
-    continuar = input("Deseja adicionar outra pessoa? (sim/não): ")
+    continuar = input("\nDeseja adicionar outra pessoa? (sim/não): ")
     if continuar.lower() != 'sim':
         break
+conn.close()
