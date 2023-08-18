@@ -1,22 +1,3 @@
-# Neste exercício, você criará uma hierarquia de classes envolvendo uma classe abstrata Pessoa, com subclasses Aluno e Professor.
-# Cada classe deve implementar métodos específicos, usando conceitos de abstração, herança e programação orientada a objetos (POO).
-# Crie uma classe abstrata chamada Pessoa com o método abstrato exibir_info() e calcular_salario().
-# Implemente o método exibir_info() para exibir informações básicas da pessoa, como nome e idade.
-# Implemente o método calcular_salario() como um método abstrato, que será diferente para cada subclasse.
-# Crie uma subclasse Aluno que herde da classe Pessoa.
-# Implemente o método exibir_info() para exibir informações específicas de um aluno, como nome, idade e número de matrícula.
-# Implemente o método calcular_salario() para alunos, que, neste caso, não se aplica. Pode ser um método vazio.
-# Crie uma subclasse Professor que herde da classe Pessoa.
-# Implemente o método exibir_info() para exibir informações específicas de um professor, como nome, idade e disciplina lecionada.
-# Implemente o método calcular_salario() para professores, calculando o salário com base na carga horária e valor por hora.
-# Crie instâncias de Aluno e Professor.
-# Chame o método exibir_info() para cada instância para verificar a exibição correta das informações.
-# Chame o método calcular_salario() para o professor e exiba o valor calculado.
-# Utilize a biblioteca sqlite3 para criar uma tabela chamada Pessoas com os campos tipo (para distinguir entre aluno e professor),
-# nome, idade, info_extra (número de matrícula para aluno, disciplina para professor) e salario (nullable para aluno).
-# Implemente métodos para adicionar instâncias de Aluno e Professor à tabela Pessoas, extraindo as informações dos métodos exibir_info()
-# e calcular_salario() e outros métodos que trabalhem comandos SQL atráves de métodos / funções em Python.
-
 from abc import ABC, abstractmethod
 import sqlite3
 
@@ -50,24 +31,59 @@ class Professor(Pessoa):
         self.disciplina = disciplina
         self.carga_horaria = carga_horaria
         self.valor_por_hora = valor_por_hora
-
-    def calcular_salario(self):
-        salario = self.carga_horaria * self.valor_por_hora
-        print(f'Salario: {salario}')
     
     def exibir_info(self):
         print(f"Nome: {self.nome}, Idade: {self.idade}, Disciplina: {self.disciplina}")
 
-# Criar instâncias de Aluno e Professor
-aluno = Aluno("João", 20, "A12345")
-professor = Professor("Maria", 35, "Matemática", 40, 50.0)
+    def calcular_salario(self):
+        salario = self.carga_horaria * self.valor_por_hora
+        return salario
 
-# aluno.exibir_info()
-# professor.exibir_info()
-# professor.calcular_salario()
+def adicionar_pessoa():
+    tipo = input("Digite 'aluno' para adicionar um aluno, ou 'professor' para adicionar um professor: ")
+    nome = input("Digite o nome da pessoa: ")
+    idade = int(input("Digite a idade da pessoa: "))
+    
+    if tipo == 'aluno':
+        matricula = input("Digite o número de matrícula do aluno: ")
+        aluno = Aluno(nome, idade, matricula)
+        salario = None
+        info_extra = matricula
+    elif tipo == 'professor':
+        disciplina = input("Digite a disciplina lecionada pelo professor: ")
+        carga_horaria = int(input("Digite a carga horária do professor: "))
+        valor_por_hora = float(input("Digite o valor por hora do professor: "))
+        professor = Professor(nome, idade, disciplina, carga_horaria, valor_por_hora)
+        salario = professor.calcular_salario()
+        info_extra = disciplina
+    
+    conn = sqlite3.connect("pessoas.db")
+    cursor = conn.cursor()
 
+    cursor.execute('INSERT INTO Pessoas (tipo, nome, idade, info_extra, salario) VALUES (?, ?, ?, ?, ?)',
+                   (tipo, nome, idade, info_extra, salario))
+    conn.commit()
 
-# Crear tabla
+    conn.close()
+
+def listar_pessoas():
+    conn = sqlite3.connect("pessoas.db")
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT tipo, nome, idade, info_extra, salario FROM Pessoas')
+    pessoas = cursor.fetchall()
+
+    for pessoa in pessoas:
+        tipo, nome, idade, info_extra, salario = pessoa
+
+        if tipo == 'aluno':
+            print(f"\nAluno: \nNome: {nome}, Idade: {idade}, Matrícula: {info_extra}")
+
+        elif tipo == 'professor':
+            print(f"\nProfessor: \nNome: {nome}, Idade: {idade}, Disciplina: {info_extra}, Salário: {salario}")
+
+    conn.close()
+
 conn = sqlite3.connect("pessoas.db")
 cursor = conn.cursor()
 
@@ -83,40 +99,11 @@ cursor.execute('''
 ''')
 
 conn.commit()
-
-# Ingresar datos en la tabla
-cursor.execute('INSERT INTO Pessoas (tipo, nome, idade, info_extra, salario) VALUES (?, ?, ?, ?, ?)',
-               ('aluno', aluno.nome, aluno.idade, aluno.matricula, None))
-conn.commit()
-
-# Ingresar datos en la tabla profesor
-cursor.execute('INSERT INTO Pessoas (tipo, nome, idade, info_extra, salario) VALUES (?, ?, ?, ?, ?)',
-               ('professor', professor.nome, professor.idade, professor.disciplina, professor.calcular_salario()))
-conn.commit()
-
 conn.close()
 
-
-def listar_pessoas():
-
-    conn = sqlite3.connect("pessoas.db")
-    cursor = conn.cursor()
-
-    cursor.execute('SELECT tipo, nome, idade, info_extra, salario FROM Pessoas')
-    pessoas = cursor.fetchall()
-
-    for pessoa in pessoas:
-
-        tipo, nome, idade, info_extra, salario = pessoa
-
-        if tipo == 'aluno':
-            print(f"Aluno: Nome={nome}, Idade={idade}, Matrícula={info_extra}")
-
-        elif tipo == 'professor':
-            print(f"Professor: Nome={nome}, Idade={idade}, Disciplina={info_extra}, Salário={salario}")
-
-    conn.close()
-
-listar_pessoas()
-
-
+while True:
+    adicionar_pessoa()
+    listar_pessoas()
+    continuar = input("Deseja adicionar outra pessoa? (sim/não): ")
+    if continuar.lower() != 'sim':
+        break
