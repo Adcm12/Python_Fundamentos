@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import sqlite3
 
+# Clases
+
 class Pessoa(ABC):
     def __init__(self, nome, idade):
         self.nome = nome
@@ -39,18 +41,23 @@ class Professor(Pessoa):
         salario = self.carga_horaria * self.valor_por_hora
         return salario
 
+# Funcion para adicionar personas
+
 def adicionar_pessoa():
+
     tipo = input("\nDigite 'alumno' para adicionar um alumno, ou 'profesor' para adicionar um profesor: ")
     nome = input("\nDigite o nome da pessoa: ")
     idade = int(input("Digite a idade da pessoa: "))
     
     if tipo == 'alumno':
+
         matricula = input("Digite o número de matrícula do aluno: ")
         aluno = Aluno(nome, idade, matricula)
         salario = None
         info_extra = matricula
 
     elif tipo == 'profesor':
+
         disciplina = input("Digite a disciplina lecionada pelo profesor: ")
         carga_horaria = int(input("Digite a carga horária do profesor: "))
         valor_por_hora = float(input("Digite o valor por hora do profesor: "))
@@ -65,49 +72,75 @@ def adicionar_pessoa():
                    (tipo, nome, idade, info_extra, salario))
     conn.commit()
 
-    conn.close()
 
-def listar_pessoas():
+def mostrar_personas():
+
     conn = sqlite3.connect("pessoas.db")
     cursor = conn.cursor()
 
-    cursor.execute('SELECT tipo, nome, idade, info_extra, salario FROM Pessoas')
-    pessoas = cursor.fetchall()
+    tipo = input('Digite el tipo de persona, "alumno" o "professor": ')
 
-    for pessoa in pessoas:
-        tipo, nome, idade, info_extra, salario = pessoa
+    if tipo == 'alumno':
 
-        if tipo == 'aluno':
-            print(f"\nAluno: \nNome: {nome}, Idade: {idade}, Matrícula: {info_extra}")
+        cursor.execute("SELECT nome, idade, info_extra FROM Pessoas WHERE tipo = 'alumno'")
+        alunos = cursor.fetchall()
 
-        elif tipo == 'professor':
-            print(f"\nProfessor: \nNome: {nome}, Idade: {idade}, Disciplina: {info_extra}, Salário: {salario}")
+        for aluno in alunos:
 
-    # conn.close()
+            nome, idade, info_extra = aluno
 
-conn = sqlite3.connect("pessoas.db")
-cursor = conn.cursor()
+            print(f"\nAlumno:\nNombre: {nome}, Edad: {idade}, Matrícula: {info_extra}")
 
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Pessoas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        tipo TEXT,
-        nome TEXT,
-        idade INTEGER,
-        info_extra TEXT,
-        salario REAL
-    )
-''')
+    elif tipo == 'professor':
 
-conn.commit()
+        cursor.execute("SELECT nome, idade, info_extra, salario FROM Pessoas WHERE tipo = 'profesor'")        
+        profesores = cursor.fetchall()
+
+        for professor in profesores:
+
+            nome, idade, info_extra, salario = professor
+            print(f"\nProfesor:\nNombre: {nome}, Edad: {idade}, Disciplina: {info_extra}, Salario: {salario}")
+
+    conn.close()
+
+def crear_tabela():
+
+    conn = sqlite3.connect("pessoas.db")
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Pessoas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tipo TEXT,
+            nome TEXT,
+            idade INTEGER,
+            info_extra TEXT,
+            salario REAL
+        )
+    ''')
+
+    conn.commit()
 
 
 while True:
+
+    crear_tabela()
     conn = sqlite3.connect("pessoas.db")
     cursor = conn.cursor()
-    adicionar_pessoa()
-    listar_pessoas()
-    continuar = input("\nDeseja adicionar outra pessoa? (sim/não): ")
-    if continuar.lower() != 'sim':
+
+    opcion = int(input('Digite uma opcao: \n 1) Adicionar pessoas \n 2) Mostrar pessoas \n 3) Salir:  '))
+
+    if opcion == 1 :
+
+        adicionar_pessoa()
+
+    elif opcion == 2:
+
+        mostrar_personas()
+
+    elif opcion == 3:
+
         break
+    else: 
+        print('Opcao invalida!\n')
 conn.close()
