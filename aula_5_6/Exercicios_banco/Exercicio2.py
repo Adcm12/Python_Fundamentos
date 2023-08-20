@@ -1,5 +1,26 @@
+# Neste exercício, você criará uma hierarquia de classes envolvendo uma classe abstrata Pessoa, com subclasses Aluno e Professor.
+# Cada classe deve implementar métodos específicos, usando conceitos de abstração, herança e programação orientada a objetos (POO).
+# Crie uma classe abstrata chamada Pessoa com o método abstrato exibir_info() e calcular_salario().
+# Implemente o método exibir_info() para exibir informações básicas da pessoa, como nome e idade.
+# Implemente o método calcular_salario() como um método abstrato, que será diferente para cada subclasse.
+# Crie uma subclasse Aluno que herde da classe Pessoa.
+# Implemente o método exibir_info() para exibir informações específicas de um aluno, como nome, idade e número de matrícula.
+# Implemente o método calcular_salario() para alunos, que, neste caso, não se aplica. Pode ser um método vazio.
+# Crie uma subclasse Professor que herde da classe Pessoa.
+# Implemente o método exibir_info() para exibir informações específicas de um professor, como nome, idade e disciplina lecionada.
+# Implemente o método calcular_salario() para professores, calculando o salário com base na carga horária e valor por hora.
+# Crie instâncias de Aluno e Professor.
+# Chame o método exibir_info() para cada instância para verificar a exibição correta das informações.
+# Chame o método calcular_salario() para o professor e exiba o valor calculado.
+# Utilize a biblioteca sqlite3 para criar uma tabela chamada Pessoas com os campos tipo (para distinguir entre aluno e professor),
+# nome, idade, info_extra (número de matrícula para aluno, disciplina para professor) e salario (nullable para aluno).
+# Implemente métodos para adicionar instâncias de Aluno e Professor à tabela Pessoas, extraindo as informações dos métodos exibir_info()
+# e calcular_salario() e outros métodos que trabalhem comandos SQL atráves de métodos / funções em Python.
+
+
 from abc import ABC, abstractmethod
 import sqlite3
+import os
 
 # Clases
 
@@ -45,22 +66,24 @@ class Professor(Pessoa):
 
 def adicionar_pessoa():
 
-    tipo = input("\nDigite 'alumno' para adicionar um alumno, ou 'profesor' para adicionar um profesor: ")
+    tipo = input("\nDigite 'Alumno' para adicionar um alumno, ou 'Profesor' para adicionar um profesor: ").capitalize()
     nome = input("\nDigite o nome da pessoa: ")
     idade = int(input("Digite a idade da pessoa: "))
-    
-    if tipo == 'alumno':
+
+
+    if tipo == 'Alumno':
 
         matricula = input("Digite o número de matrícula do aluno: ")
         aluno = Aluno(nome, idade, matricula)
         salario = None
         info_extra = matricula
 
-    elif tipo == 'profesor':
+    elif tipo == 'Profesor':
 
         disciplina = input("Digite a disciplina lecionada pelo profesor: ")
         carga_horaria = int(input("Digite a carga horária do profesor: "))
         valor_por_hora = float(input("Digite o valor por hora do profesor: "))
+
         professor = Professor(nome, idade, disciplina, carga_horaria, valor_por_hora)
         salario = professor.calcular_salario()
         info_extra = disciplina
@@ -71,18 +94,20 @@ def adicionar_pessoa():
     cursor.execute('INSERT INTO Pessoas (tipo, nome, idade, info_extra, salario) VALUES (?, ?, ?, ?, ?)',
                    (tipo, nome, idade, info_extra, salario))
     conn.commit()
-
+    os.system('cls')
+    print(f'{tipo} adiccionado con sucesso!')
 
 def mostrar_personas():
 
     conn = sqlite3.connect("pessoas.db")
     cursor = conn.cursor()
 
-    tipo = input('Digite el tipo de persona, "alumno" o "professor": ')
+    tipo = input('Digite el tipo de persona, "Alumno" o "Profesor": ').capitalize()
+    os.system('cls')
 
-    if tipo == 'alumno':
+    if tipo == 'Alumno':
 
-        cursor.execute("SELECT nome, idade, info_extra FROM Pessoas WHERE tipo = 'alumno'")
+        cursor.execute("SELECT nome, idade, info_extra FROM Pessoas WHERE tipo = 'Alumno'")
         alunos = cursor.fetchall()
 
         for aluno in alunos:
@@ -91,9 +116,9 @@ def mostrar_personas():
 
             print(f"\nAlumno:\nNombre: {nome}, Edad: {idade}, Matrícula: {info_extra}")
 
-    elif tipo == 'professor':
+    elif tipo == 'Profesor':
 
-        cursor.execute("SELECT nome, idade, info_extra, salario FROM Pessoas WHERE tipo = 'profesor'")        
+        cursor.execute("SELECT nome, idade, info_extra, salario FROM Pessoas WHERE tipo = 'Profesor'")        
         profesores = cursor.fetchall()
 
         for professor in profesores:
@@ -121,26 +146,34 @@ def crear_tabela():
 
     conn.commit()
 
+if __name__ == '__main__':
 
-while True:
+    try: 
+        while True:
 
-    crear_tabela()
-    conn = sqlite3.connect("pessoas.db")
-    cursor = conn.cursor()
+            crear_tabela()
+            conn = sqlite3.connect("pessoas.db")
+            cursor = conn.cursor()
 
-    opcion = int(input('Digite uma opcao: \n 1) Adicionar pessoas \n 2) Mostrar pessoas \n 3) Salir:  '))
+            opcion = int(input('\nDigite uma opcao: \n 1) Adicionar pessoas \n 2) Mostrar pessoas \n 3) Salir:  '))
 
-    if opcion == 1 :
+            if opcion == 1 :
 
-        adicionar_pessoa()
+                adicionar_pessoa()
 
-    elif opcion == 2:
+            elif opcion == 2:
 
-        mostrar_personas()
+                mostrar_personas()
 
-    elif opcion == 3:
+            elif opcion == 3:
 
-        break
-    else: 
-        print('Opcao invalida!\n')
-conn.close()
+                break
+            else: 
+                print('Opcao invalida!\n')
+
+        
+
+    except Exception as e:
+        print(f'Ocurrió un error: {str(e)}')
+
+    conn.close()
