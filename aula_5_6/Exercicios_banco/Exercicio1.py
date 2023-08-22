@@ -60,7 +60,7 @@ class Aluno:
 
         conexao = sqlite3.connect('escola.db')
         cursor = conexao.cursor()
-        cursor.execute('SELECT * FROM Alunos WHERE id = ?', (id,))
+        cursor.execute('SELECT * FROM Alunos WHERE id = ?', (id))
         aluno_data = cursor.fetchone()
         conexao.close()
         
