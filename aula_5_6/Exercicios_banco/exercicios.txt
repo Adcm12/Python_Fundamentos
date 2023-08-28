@@ -34,3 +34,43 @@ Utilize a biblioteca sqlite3 para criar uma tabela chamada Pessoas com os campos
 nome, idade, info_extra (número de matrícula para aluno, disciplina para professor) e salario (nullable para aluno).
 Implemente métodos para adicionar instâncias de Aluno e Professor à tabela Pessoas, extraindo as informações dos métodos exibir_info()
 e calcular_salario() e outros métodos que trabalhem comandos SQL atráves de métodos / funções em Python.
+
+
+Ejercicio 3: Creación de una aplicación de gestión de empleados
+
+En este ejercicio, crearás una aplicación de gestión de empleados utilizando programación orientada a objetos (POO) en Python y SQLite3. La aplicación permitirá agregar, ver, actualizar y eliminar registros de empleados en una tabla llamada "Empleados" en una base de datos SQLite. Sigue las instrucciones a continuación:
+
+Utiliza la biblioteca sqlite3 para crear una base de datos llamada "empresa.db".
+Crea una tabla llamada "Empleados" con los siguientes campos: id, nombre, edad y salario.
+Crea una clase llamada "Empleado".
+Crea los atributos id, nombre, edad y salario en la clase Empleado. Implementa el constructor __init__() para recibir los valores de los atributos.
+Crea métodos getters (get_id(), get_nombre(), get_edad(), get_salario()) para acceder a los valores de los atributos.
+Crea métodos setters (set_nombre(), set_edad(), set_salario()) para establecer los valores de los atributos.
+Crea un método estático en la clase Empleado llamado crear_empleado() que acepte los valores de nombre, edad y salario como parámetros. Este método debe crear una instancia de la clase Empleado con los valores proporcionados e insertar un registro en la tabla "Empleados".
+Crea un método estático llamado buscar_empleado_por_id() que acepte un ID como parámetro y retorne una instancia de Empleado con los valores correspondientes de la tabla "Empleados".
+Crea un método estático llamado listar_empleados() que consulte la tabla "Empleados" y retorne una lista de instancias de Empleado.
+Crea un bucle principal que muestre un menú al usuario con opciones como "Agregar Empleado", "Buscar Empleado por ID", "Listar Empleados" y "Salir". Implementa la lógica para cada opción del menú, llamando a los métodos correspondientes de la clase Empleado.
+En la opción "Agregar Empleado", solicita al usuario ingresar nombre, edad y salario, y luego llama al método crear_empleado().
+En la opción "Buscar Empleado por ID", pide al usuario que ingrese un ID y muestra los detalles del empleado correspondiente utilizando el método buscar_empleado_por_id().
+En la opción "Listar Empleados", muestra todos los empleados utilizando el método listar_empleados().
+Al salir del bucle principal, cierra la conexión con la base de datos.
+
+
+Ejercicio 2: Creación de una aplicación de gestión de productos
+
+En este ejercicio, crearás una aplicación de gestión de productos utilizando programación orientada a objetos (POO) en Python y SQLite3. La aplicación permitirá agregar, ver, actualizar y eliminar registros de productos en una tabla llamada "Productos" en una base de datos SQLite. Sigue las instrucciones a continuación:
+
+Utiliza la biblioteca sqlite3 para crear una base de datos llamada "almacen.db".
+Crea una tabla llamada "Productos" con los siguientes campos: id, nombre, precio y cantidad.
+Crea una clase llamada "Producto".
+Crea los atributos id, nombre, precio y cantidad en la clase Producto. Implementa el constructor __init__() para recibir los valores de los atributos.
+Crea métodos getters (get_id(), get_nombre(), get_precio(), get_cantidad()) para acceder a los valores de los atributos.
+Crea métodos setters (set_nombre(), set_precio(), set_cantidad()) para establecer los valores de los atributos.
+Crea un método estático en la clase Producto llamado crear_producto() que acepte los valores de nombre, precio y cantidad como parámetros. Este método debe crear una instancia de la clase Producto con los valores proporcionados e insertar un registro en la tabla "Productos".
+Crea un método estático llamado buscar_producto_por_id() que acepte un ID como parámetro y retorne una instancia de Producto con los valores correspondientes de la tabla "Productos".
+Crea un método estático llamado listar_productos() que consulte la tabla "Productos" y retorne una lista de instancias de Producto.
+Crea un bucle principal que muestre un menú al usuario con opciones como "Agregar Producto", "Buscar Producto por ID", "Listar Productos" y "Salir". Implementa la lógica para cada opción del menú, llamando a los métodos correspondientes de la clase Producto.
+En la opción "Agregar Producto", solicita al usuario ingresar nombre, precio y cantidad, y luego llama al método crear_producto().
+En la opción "Buscar Producto por ID", pide al usuario que ingrese un ID y muestra los detalles del producto correspondiente utilizando el método buscar_producto_por_id().
+En la opción "Listar Productos", muestra todos los productos utilizando el método listar_productos().
+Al salir del bucle principal, cierra la conexión con la base de datos.
