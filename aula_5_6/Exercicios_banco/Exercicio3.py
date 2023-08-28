@@ -53,21 +53,21 @@ class Productos():
 
         return self.cantidad
 
-    def setters_id(self, id_novo):
+    def setters_id(self, id):
 
-        self.id = id_novo
+        self.id = id
 
-    def setters_nombre(self, nombre_novo):
+    def setters_nombre(self, nombre):
 
-        self.nombre = nombre_novo
+        self.nombre = nombre
 
-    def setters_precio(self, precio_novo):
+    def setters_precio(self, precio):
 
-        self.precio = precio_novo
+        self.precio = precio
 
-    def setters_cantidad(self, cantidad_nova):
+    def setters_cantidad(self, cantidad):
 
-        self.cantidad = cantidad_nova
+        self.cantidad = cantidad
 
     @staticmethod
     def crear_producto(id, nombre, precio, cantidad):
@@ -86,38 +86,36 @@ class Productos():
 
     def buscar_producto_por_id(id):
 
-        producto = Productos(id, nombre, precio, cantidad)
-
         conexion = sqlite3.connect('almacen.db')
         cursor = conexion.cursor()
 
-        cursor.execute('SELECT * FROM Productos WHERE id = ?', (id))
-        cursor.fetchone()
+        cursor.execute('SELECT * FROM Productos WHERE id = ?', (id,))
+        datos = cursor.fetchone()
         conexion.close()
 
-        if cursor:
-            id, nombre, precio, cantidad = producto
+        if datos:
+            id, nombre, precio, cantidad = datos
             return Productos(id, nombre, precio, cantidad)
         
         else:
             return None
 
-    def listar_productos(id, nombre, precio, cantidad):
+    def listar_productos():
 
         conexion = sqlite3.connect('almacen.db')
         cursor = conexion.cursor()
 
         cursor.execute('SELECT * FROM Productos')
-        cursor.fetchall()
+        producto = cursor.fetchall()
         conexion.close()
+        lista_productos = []
 
-        if cursor:
+        for productos in producto:
 
-            id, nombre, precio, cantidad = cursor
-            return Productos(id, nombre, precio, cantidad)
-        
-        else:
-            return None
+            id, nombre, precio, cantidad = producto
+            lista_productos.append(Productos(id, nombre, precio, cantidad))
+
+        return lista_productos
         
 
 if __name__ == '__main__':
@@ -126,22 +124,45 @@ if __name__ == '__main__':
     try:            
         while True:
 
-            menu = int(input('\n Menu \n1 - Crear producto  \n2 - Buscar producto por id  \n3 - Listar productos  \n4 - Salir \nEscoje una ipcion: '))
+            menu = int(input('\n Menu \n1 - Crear producto  \n2 - Buscar producto por id  \n3 - Listar productos  \n4 - Salir \nEscoje una opcion: '))
 
             if menu == 1: 
 
                 id = int(input('Ingresa el id del producto: '))
                 nombre = input('Ingresa el nombre del producto: ')
-                valor = float(input('Ingresa el valor del producto: '))
+                precio = float(input('Ingresa el valor del producto: '))
                 cantidad = int(input('Ingresa la cantidad del producto: '))
 
-                Productos.crear_producto(id, nombre, valor, cantidad)
+                Productos.crear_producto(id, nombre, precio, cantidad)
 
             elif menu == 2:
 
                 id = int(input('Ingresa el id del producto: '))
-                Productos.buscar_producto_por_id(id)                
+                producto = Productos.buscar_producto_por_id(id)
 
+                if producto:
+
+                    print(f"ID: {producto.get_id()}")
+                    print(f"Nombre: {producto.get_nombre()}")
+                    print(f"Precio: {producto.get_precio()}")
+                    print(f"Cantidad: {producto.get_cantidad()}\n")
+
+                else: 
+
+                    print('Producto no encontrado')
+
+            elif menu == 3:
+
+                productos = Productos.listar_productos()
+                os.system('cls')            
+                print("Lista de productos:")
+
+                for producto in productos:
+                    print(f"\nID: {producto.get_id()}, Nombre: {producto.get_nombre()}, Precio: {producto.get_precio()}, Cantidad: {producto.get_cantidad()}")
+
+            elif menu == 4:
+
+                break
 
 
     except Exception as e:
