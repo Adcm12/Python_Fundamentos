@@ -154,6 +154,29 @@ def verificar_salario(hora, valor, dias):
 
     print(f'El salario del colaborador por {dias} dias trabajados es: {round(salario, 2)}')
 
+def buscar_item_en_la_lista(lista):
+
+    int_cuenta = 0
+    float_cuenta = 0
+    str_cuenta = 0
+
+    for elemento in lista:
+
+        if isinstance(elemento, int):
+
+            int_cuenta += 1
+
+        elif isinstance(elemento, float):
+            
+            float_cuenta += 1
+
+        elif isinstance(elemento, str):
+
+            str_cuenta += 1
+        
+    print(f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} \nCantidad de string: {str_cuenta} \nCantidad de int: {int_cuenta} \nCantidad de floats: {float_cuenta}')
+            
+
 def main():
 
     menu = '''
@@ -169,6 +192,7 @@ def main():
     \n9) Calculadora
     \n10) Buscar letra
     \n11) Calcular salario
+    \n12) Buscar Item en lista
     \nOpcion = '''
 
     while True:
@@ -275,6 +299,45 @@ def main():
 
                 verificar_salario(horas, valor, dias)
 
+            elif funcion_seleccionada == 12:
+                
+                lista = []
+
+                try:
+
+                    int_cuenta = int(input('\nCuantos datos tipo (int) va a inserir en la lista?. (Minimo 2): '))
+                    str_cuenta = int(input('\nCuantos datos tipo (str) va a inserir en la lista?. (Minimo 2): '))
+                    float_cuenta = int(input('\nCuantos datos tipo (float) va a inserir en la lista?. (Minimo 2): '))
+
+                    if int_cuenta >= 2 and float_cuenta >= 2 and str_cuenta >= 2:
+
+                        for i in range (int_cuenta):
+
+                            valor = int(input(f"\nIngrese el elemento {(i+1)} tipo (int): "))
+                            lista.append(valor)
+
+                        for i in range (str_cuenta):
+
+                            valor = input(f"\nIngrese el elemento {(i+1)} tipo (str): ")
+                            lista.append(valor)
+
+                        for i in range (float_cuenta):
+
+                            valor = float(input(f"\nIngrese el elemento {(i+1)} tipo (float): "))
+                            lista.append(valor)
+
+                        print("\nLa lista cumple con los requisitos.")
+
+                        buscar_item_en_la_lista(lista)
+
+                    else:
+                        print("No cumple con los requisitos.")
+                
+                except Exception as e:
+                    print('Erro: ', e)
+
+
+                
 
         except Exception as e:
             print('Erro: ', e)
