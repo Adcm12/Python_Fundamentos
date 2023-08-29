@@ -103,7 +103,6 @@ def menor_de_la_lista(lista):
 
     print(f'\nEl numero menor de la lista es: {variable}')
 
-
 def calculadora(numero1, numero2, opcion):
 
     if opcion == 1:
@@ -134,7 +133,26 @@ def calculadora(numero1, numero2, opcion):
     else:
         print('Digite una opcion valida')
 
+def buscar_letra(texto, letra):
 
+    cantidad = 0
+    
+    for i in texto:
+
+        if i == letra:
+            
+            cantidad += 1
+        else:
+            False
+                       
+    
+    print(f'La letra {letra}, aparece: {cantidad}')
+
+def verificar_salario(hora, valor, dias):
+
+    salario = (hora * valor) * dias
+
+    print(f'El salario del colaborador por {dias} dias trabajados es: {round(salario, 2)}')
 
 def main():
 
@@ -149,6 +167,8 @@ def main():
     \n7) Cantidad de pares e impares
     \n8) Menor de varios numeros
     \n9) Calculadora
+    \n10) Buscar letra
+    \n11) Calcular salario
     \nOpcion = '''
 
     while True:
@@ -239,6 +259,22 @@ def main():
 
                     except Exception as e:
                         print('Erro: ', e)
+
+            elif funcion_seleccionada == 10:
+
+                texto = input('Digite un texto: \n')
+                letra = input('Digite la letra a buscar: ')
+
+                buscar_letra(texto, letra)
+            
+            elif funcion_seleccionada == 11:
+
+                horas = int(input('Digite las horas trabajadas: '))
+                valor = float(input('Digite el valor de las horas: '))
+                dias = int(input('Digite cuantos dias trabajo del mes: '))
+
+                verificar_salario(horas, valor, dias)
+
 
         except Exception as e:
             print('Erro: ', e)
