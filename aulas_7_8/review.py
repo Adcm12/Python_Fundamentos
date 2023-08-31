@@ -213,7 +213,13 @@ class Funciones(Logica_Banco):
                     
                     numero1 = int(input('\nDigite un numero: '))
                     numero2 = int(input('\nDigite otro numero: '))
+                    
+                    if self.eh_positivo == True:
+
+                        print('Es positivo')
+                        registro_string0 = f'(Eh positivo) {numero1} Es positivo '
                     print(self.eh_positivo(numero1, numero2))
+
 
                 elif funcion_seleccionada == 2:
 
