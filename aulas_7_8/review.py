@@ -1,348 +1,360 @@
 import os
 
-def eh_positivo(numero1, numero2):
-    
-    if numero1 > 0 and numero2 > 0:
+class Funciones():
 
-        return True
-
-    else:
-
-        return False
-
-def son_iguales(numero1, numero2):
-    
-    if numero1 == numero2:
-
-        print('Son iguales')
-
-    else:
-
-        print('No son iguales')
-
-def maior(numero1, numero2):
-
-    if eh_positivo(numero1, numero2) is True:
-
-        if numero1 > numero2:
-
-            print( f'{numero1} es mayor que {numero2}')            
-
-        elif numero2 > numero1: 
-            print(f'{numero2} es mayor que {numero1}')
-
-        else: 
-            print("Los numeros son iguales, digite numero diferentes")
-            
-def menor(numero1, numero2):
-
-    if eh_positivo(numero1, numero2) is True:
-
-        if numero1 < numero2:
-            print(f'{numero1} es menor que {numero2}')
+    def eh_positivo(self, numero1, numero2):
         
-        elif numero2 < numero1: 
-            print(f'{numero2} es menor que {numero1}')
+        if numero1 > 0 and numero2 > 0:
 
-        else: 
-            print("Los numeros son iguales, digite numero diferentes")
+            return True
 
-def verifica_si_es_par(numero):
-
-    if numero > 0:
-
-        if numero % 2 == 0:
-
-            print('El numero es par') 
-
-        else: 
-            print('El numero es impar') 
-    
-    else:
-
-        print('El numero es impar')
-
-def mayor_de_la_lista(lista):
-
-    variable = 0
-
-    for i in lista:
-
-        if  i > variable:
-
-            variable = i
-
-    print(f'\nEl numero mayor de la lista es: {variable}')
-
-def cantidad_de_pares_en_lista(lista):
-
-    lista_par : int= []
-    lista_impar : int= []
-
-    for i in lista:
-
-        if i % 2 == 0:
-
-            lista_par.append(i)
-        
-        else: 
-            lista_impar.append(i)
-
-    print(f'\nLista de pares {lista_par}, cantidad: {len(lista_par)}')
-    print(f'\nLista de impares {lista_impar}, cantidad: {len(lista_impar)}')
-
-def menor_de_la_lista(lista):
-
-    variable = lista[0]
-
-    for i in lista:
-
-        if  i < variable:
-
-            variable = i
-
-    print(f'\nEl numero menor de la lista es: {variable}')
-
-def calculadora(numero1, numero2, opcion):
-
-    if opcion == 1:
-
-        resultado = numero1 + numero2
-        print(f'La suma es: {resultado}')
-
-        
-    elif opcion == 2:
-
-        resultado = numero1 - numero2
-        print(f'La resta es: {resultado}')
-
-    elif opcion == 3:
-
-        resultado = numero1 * numero2
-        print(f'La multiplicacion es: {resultado}')
-
-    elif opcion == 4:
-
-        resultado = numero1 / numero2
-        print(f'La division es: {resultado}')
-    
-    # elif opcion == 5:
-
-    #     quit()
-    
-    else:
-        print('Digite una opcion valida')
-
-def buscar_letra(texto, letra):
-
-    cantidad = 0
-    
-    for i in texto:
-
-        if i == letra:
-            
-            cantidad += 1
         else:
-            False
-                       
-    
-    print(f'La letra {letra}, aparece: {cantidad}')
 
-def verificar_salario(hora, valor, dias):
+            return False
 
-    salario = (hora * valor) * dias
-
-    print(f'El salario del colaborador por {dias} dias trabajados es: {round(salario, 2)}')
-
-def buscar_item_en_la_lista(lista):
-
-    int_cuenta = 0
-    float_cuenta = 0
-    str_cuenta = 0
-
-    for elemento in lista:
-
-        if isinstance(elemento, int):
-
-            int_cuenta += 1
-
-        elif isinstance(elemento, float):
-            
-            float_cuenta += 1
-
-        elif isinstance(elemento, str):
-
-            str_cuenta += 1
+    def son_iguales(self, numero1, numero2):
         
-    print(f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} \nCantidad de string: {str_cuenta} \nCantidad de int: {int_cuenta} \nCantidad de floats: {float_cuenta}')
+        if numero1 == numero2:
+
+            print('Son iguales')
+
+        else:
+
+            print('No son iguales')
+
+    def maior(self, numero1, numero2):
+
+        if self.eh_positivo(numero1, numero2) is True:
+
+            if numero1 > numero2:
+
+                print( f'{numero1} es mayor que {numero2}')            
+
+            elif numero2 > numero1: 
+                print(f'{numero2} es mayor que {numero1}')
+
+            else: 
+                print("Los numeros son iguales, digite numero diferentes")
+                
+    def menor(self, numero1, numero2):
+
+        if self.eh_positivo(numero1, numero2) is True:
+
+            if numero1 < numero2:
+                print(f'{numero1} es menor que {numero2}')
             
+            elif numero2 < numero1: 
+                print(f'{numero2} es menor que {numero1}')
 
-def main():
+            else: 
+                print("Los numeros son iguales, digite numero diferentes")
 
-    menu = '''
-    \nSeleccione la funcion:
-    \n1) Es positivo:
-    \n2) Son iguales
-    \n3) Maior
-    \n4) Menor
-    \n5) Es Par
-    \n6) Mayor de varios numeros
-    \n7) Cantidad de pares e impares
-    \n8) Menor de varios numeros
-    \n9) Calculadora
-    \n10) Buscar letra
-    \n11) Calcular salario
-    \n12) Buscar Item en lista
-    \nOpcion = '''
+    def verifica_si_es_par(self, numero):
 
-    while True:
+        if numero > 0:
 
-        try:
+            if numero % 2 == 0:
 
-            funcion_seleccionada = int(input(menu))
+                print('El numero es par') 
 
-            if funcion_seleccionada == 1:
-                
-                numero1 = int(input('\nDigite un numero: '))
-                numero2 = int(input('\nDigite otro numero: '))
-                print(eh_positivo(numero1, numero2))
+            else: 
+                print('El numero es impar') 
+        
+        else:
 
-            elif funcion_seleccionada == 2:
+            print('El numero es impar')
 
-                numero1 = int(input('\nDigite un numero: '))
-                numero2 = int(input('Digite otro numero: '))
-                son_iguales(numero1, numero2)
+    def mayor_de_la_lista(self, lista):
 
-            elif funcion_seleccionada == 3:
+        variable = 0
 
-                numero1 = int(input('\nDigite un numero: '))
-                numero2 = int(input('Digite otro numero: '))
-                maior(numero1, numero2)
+        for i in lista:
 
-            elif funcion_seleccionada == 4:
+            if  i > variable:
 
-                numero1 = int(input('\nDigite un numero: '))
-                numero2 = int(input('Digite otro numero: '))
-                menor(numero1, numero2)
+                variable = i
 
-            elif funcion_seleccionada == 5:
+        print(f'\nEl numero mayor de la lista es: {variable}')
 
-                numero = int(input('\nDigite un numero: '))
-                verifica_si_es_par(numero)
+    def cantidad_de_pares_en_lista(self, lista):
+
+        lista_par : int= []
+        lista_impar : int= []
+
+        for i in lista:
+
+            if i % 2 == 0:
+
+                lista_par.append(i)
             
-            elif funcion_seleccionada == 6:
+            else: 
+                lista_impar.append(i)
 
-                lista = []
-                numero = int(input('Cuantos numeros va a inserir en la lista?: '))
+        print(f'\nLista de pares {lista_par}, cantidad: {len(lista_par)}')
+        print(f'\nLista de impares {lista_impar}, cantidad: {len(lista_impar)}')
 
-                for i in range (numero):
+    def menor_de_la_lista(self, lista):
 
-                    valor=int(input(f"Ingrese el elemento {(i+1)}: "))
-                    lista.append(valor)
-                
-                mayor_de_la_lista(lista)
+        variable = lista[0]
+
+        for i in lista:
+
+            if  i < variable:
+
+                variable = i
+
+        print(f'\nEl numero menor de la lista es: {variable}')
+
+    def calculadora(self, numero1, numero2, opcion):
+
+        if opcion == 1:
+
+            resultado = numero1 + numero2
+            print(f'La suma es: {resultado}')
+
             
-            elif funcion_seleccionada == 7:
+        elif opcion == 2:
 
-                lista = []
-                numero = int(input('Cuantos numeros va a inserir en la lista?: '))
+            resultado = numero1 - numero2
+            print(f'La resta es: {resultado}')
 
-                for i in range (numero):
+        elif opcion == 3:
 
-                    valor=int(input(f"Ingrese el elemento {(i+1)}: "))
-                    lista.append(valor)
+            resultado = numero1 * numero2
+            print(f'La multiplicacion es: {resultado}')
+
+        elif opcion == 4:
+
+            resultado = numero1 / numero2
+            print(f'La division es: {resultado}')
+            
+        else:
+            print('Digite una opcion valida')
+
+    def buscar_letra(self, texto, letra):
+
+        cantidad = 0
+        cantidad_num = 0
+        
+        for i in texto:
+
+            if i == letra:
                 
-                cantidad_de_pares_en_lista(lista)
+                cantidad += 1
+            else:
+                False
 
-            elif funcion_seleccionada == 8:
+            if i.isdigit():
 
-                lista = []
-                numero = int(input('Cuantos numeros va a inserir en la lista?: '))
+                cantidad_num += 1
+                        
+        
+        print(f'La letra {letra}, aparece: {cantidad} veces, y la cantidad de numeros: {cantidad_num}')
 
-                for i in range (numero):
+    def verificar_salario(self, hora, valor, dias):
 
-                    valor=int(input(f"Ingrese el elemento {(i+1)}: "))
-                    lista.append(valor)
+        salario = (hora * valor) * dias
+
+        print(f'El salario del colaborador por {dias} dias trabajados es: {round(salario, 2)}')
+
+    def buscar_item_en_la_lista(self, lista):
+
+        int_cuenta = 0
+        float_cuenta = 0
+        str_cuenta = 0
+
+        for elemento in lista:
+
+            if isinstance(elemento, int):
+
+                int_cuenta += 1
+
+            elif isinstance(elemento, float):
                 
-                menor_de_la_lista(lista)
+                float_cuenta += 1
 
-            elif funcion_seleccionada == 9:
+            elif isinstance(elemento, str):
 
-                while True:
+                str_cuenta += 1
+            
+        print(f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} \nCantidad de string: {str_cuenta} \nCantidad de int: {int_cuenta} \nCantidad de floats: {float_cuenta}')
+                
+
+    def main(self):
+
+        menu = '''
+        \nSeleccione la funcion:
+        \n1) Es positivo:
+        \n2) Son iguales
+        \n3) Maior
+        \n4) Menor
+        \n5) Es Par
+        \n6) Mayor de varios numeros
+        \n7) Cantidad de pares e impares
+        \n8) Menor de varios numeros
+        \n9) Calculadora
+        \n10) Buscar letra
+        \n11) Calcular salario
+        \n12) Buscar Item en lista
+        \nOpcion = '''
+
+        while True:
+
+            try:
+
+                funcion_seleccionada = int(input(menu))
+
+                if funcion_seleccionada == 1:
+                    
+                    numero1 = int(input('\nDigite un numero: '))
+                    numero2 = int(input('\nDigite otro numero: '))
+                    print(self.eh_positivo(numero1, numero2))
+
+                elif funcion_seleccionada == 2:
+
+                    numero1 = int(input('\nDigite un numero: '))
+                    numero2 = int(input('Digite otro numero: '))
+                    self.son_iguales(numero1, numero2)
+
+                elif funcion_seleccionada == 3:
+
+                    numero1 = int(input('\nDigite un numero: '))
+                    numero2 = int(input('Digite otro numero: '))
+                    self.maior(numero1, numero2)
+
+                elif funcion_seleccionada == 4:
+
+                    numero1 = int(input('\nDigite un numero: '))
+                    numero2 = int(input('Digite otro numero: '))
+                    self.menor(numero1, numero2)
+
+                elif funcion_seleccionada == 5:
+
+                    numero = int(input('\nDigite un numero: '))
+                    self.verifica_si_es_par(numero)
+                
+                elif funcion_seleccionada == 6:
+
+                    lista = []
+                    numero = int(input('Cuantos numeros va a inserir en la lista?: '))
+
+                    for i in range (numero):
+
+                        valor=int(input(f"Ingrese el elemento {(i+1)}: "))
+                        lista.append(valor)
+                    
+                    self.mayor_de_la_lista(lista)
+                
+                elif funcion_seleccionada == 7:
+
+                    lista = []
+                    numero = int(input('Cuantos numeros va a inserir en la lista?: '))
+
+                    for i in range (numero):
+
+                        valor=int(input(f"Ingrese el elemento {(i+1)}: "))
+                        lista.append(valor)
+                    
+                    self.cantidad_de_pares_en_lista(lista)
+
+                elif funcion_seleccionada == 8:
+
+                    lista = []
+                    numero = int(input('Cuantos numeros va a inserir en la lista?: '))
+
+                    for i in range (numero):
+
+                        valor=int(input(f"Ingrese el elemento {(i+1)}: "))
+                        lista.append(valor)
+                    
+                    self.menor_de_la_lista(lista)
+
+                elif funcion_seleccionada == 9:
+
+                    while True:
+
+                        try:
+                            opcion = int(input('\nEscoja una opcion \n1) Sumar \n2)Restar \n3)Multiplicar \n4)Dividir \n5)Break \n: '))
+                            
+                            if opcion == 5:
+
+                                break
+                            else:    
+                                numero1 = int(input('\nDigite un numero: '))
+                                numero2 = int(input('Digite otro numero: '))
+                                self.calculadora(numero1, numero2, opcion)
+
+                        except Exception as e:
+                            print('Erro: ', e)
+
+                elif funcion_seleccionada == 10:
+
+                    texto = input('Digite un texto: \n')
+                    letra = input('Digite la letra a buscar: ')
+
+                    if len(letra) == 1 and len(texto) >= 10:
+
+                        self.buscar_letra(texto, letra)
+
+                    else:
+                        print("El texto debe tener por lo menos 10 caracteres")
+                
+                elif funcion_seleccionada == 11:
 
                     try:
-                        opcion = int(input('\nEscoja una opcion \n1) Sumar \n2)Restar \n3)Multiplicar \n4)Dividir \n5)Break \n: '))
+
+                        horas = int(input('Digite las horas trabajadas: '))
+                        valor = float(input('Digite el valor de las horas: '))
+                        dias = int(input('Digite cuantos dias trabajo del mes: '))
+
+                        self.verificar_salario(horas, valor, dias)
                         
-                        if opcion == 5:
-
-                            break
-                        else:    
-                            numero1 = int(input('\nDigite un numero: '))
-                            numero2 = int(input('Digite otro numero: '))
-                            calculadora(numero1, numero2, opcion)
-
                     except Exception as e:
                         print('Erro: ', e)
 
-            elif funcion_seleccionada == 10:
+                elif funcion_seleccionada == 12:
+                    
+                    lista = []
 
-                texto = input('Digite un texto: \n')
-                letra = input('Digite la letra a buscar: ')
+                    try:
 
-                buscar_letra(texto, letra)
-            
-            elif funcion_seleccionada == 11:
+                        int_cuenta = int(input('\nCuantos datos tipo (int) va a inserir en la lista?. (Minimo 2): '))
+                        str_cuenta = int(input('\nCuantos datos tipo (str) va a inserir en la lista?. (Minimo 2): '))
+                        float_cuenta = int(input('\nCuantos datos tipo (float) va a inserir en la lista?. (Minimo 2): '))
 
-                horas = int(input('Digite las horas trabajadas: '))
-                valor = float(input('Digite el valor de las horas: '))
-                dias = int(input('Digite cuantos dias trabajo del mes: '))
+                        if int_cuenta >= 2 and float_cuenta >= 2 and str_cuenta >= 2:
 
-                verificar_salario(horas, valor, dias)
+                            for i in range (int_cuenta):
 
-            elif funcion_seleccionada == 12:
-                
-                lista = []
+                                valor = int(input(f"\nIngrese el elemento {(i+1)} tipo (int): "))
+                                lista.append(valor)
 
-                try:
+                            for i in range (str_cuenta):
 
-                    int_cuenta = int(input('\nCuantos datos tipo (int) va a inserir en la lista?. (Minimo 2): '))
-                    str_cuenta = int(input('\nCuantos datos tipo (str) va a inserir en la lista?. (Minimo 2): '))
-                    float_cuenta = int(input('\nCuantos datos tipo (float) va a inserir en la lista?. (Minimo 2): '))
+                                valor = input(f"\nIngrese el elemento {(i+1)} tipo (str): ")
+                                lista.append(valor)
 
-                    if int_cuenta >= 2 and float_cuenta >= 2 and str_cuenta >= 2:
+                            for i in range (float_cuenta):
 
-                        for i in range (int_cuenta):
+                                valor = float(input(f"\nIngrese el elemento {(i+1)} tipo (float): "))
+                                lista.append(valor)
 
-                            valor = int(input(f"\nIngrese el elemento {(i+1)} tipo (int): "))
-                            lista.append(valor)
+                            print("\nLa lista cumple con los requisitos.")
 
-                        for i in range (str_cuenta):
+                            self.buscar_item_en_la_lista(lista)
 
-                            valor = input(f"\nIngrese el elemento {(i+1)} tipo (str): ")
-                            lista.append(valor)
+                        else:
+                            print("No cumple con los requisitos.")
+                    
+                    except Exception as e:
+                        print('Erro: ', e)
 
-                        for i in range (float_cuenta):
-
-                            valor = float(input(f"\nIngrese el elemento {(i+1)} tipo (float): "))
-                            lista.append(valor)
-
-                        print("\nLa lista cumple con los requisitos.")
-
-                        buscar_item_en_la_lista(lista)
-
-                    else:
-                        print("No cumple con los requisitos.")
-                
-                except Exception as e:
-                    print('Erro: ', e)
-
-
-                
-
-        except Exception as e:
-            print('Erro: ', e)
+            except Exception as e:
+                print('Erro: ', e)
 
 if __name__ == '__main__':
 
-    main()
+    objeto = Funciones()
+    objeto.main()
+
 
