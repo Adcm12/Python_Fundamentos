@@ -1,6 +1,7 @@
 import os
+from review_db import Logica_Banco
 
-class Funciones():
+class Funciones(Logica_Banco):
 
     def eh_positivo(self, numero1, numero2):
         
@@ -182,6 +183,8 @@ class Funciones():
 
     def main(self):
 
+        self.crear_conexion('base.db')
+
         menu = '''
         \nSeleccione la funcion:
         \n1) Es positivo:
@@ -199,6 +202,8 @@ class Funciones():
         \nOpcion = '''
 
         while True:
+
+            registro_string = ''
 
             try:
 
@@ -349,6 +354,7 @@ class Funciones():
                     except Exception as e:
                         print('Erro: ', e)
 
+                self.insere_registro('Registro', registro_string)
             except Exception as e:
                 print('Erro: ', e)
 
