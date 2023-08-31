@@ -27,7 +27,8 @@ class Logica_Banco():
             sql_string = f"""
             Create table if not exists {nome_tabela} (
             id integer primary key,
-            registro text(50),6
+            funcion text(40),
+            registro text(40),
             data_hora_registrado text(20)
             )            
             """
@@ -48,7 +49,7 @@ class Logica_Banco():
         except Exception as e:
             print(f'Erro: {str(e)}')
 
-    def insere_registro(self, nome_tabela, registro):
+    def insere_registro(self, nome_tabela, funciones, registro):
 
         try:
 
@@ -56,8 +57,8 @@ class Logica_Banco():
             cursor = conn.cursor()
 
             sql_string = f"""
-            insert into {nome_tabela} (registro, data_hora_registrado)
-            values ('{registro}', '{datetime.now().strftime('%d/%m/%Y - %H:%M:%S')}')           
+            insert into {nome_tabela} (funcion, registro, data_hora_registrado)
+            values ('{funciones}', '{registro}', '{datetime.now().strftime('%d/%m/%Y - %H:%M:%S')}')           
             """
             cursor.execute(sql_string)
             cursor.close()
@@ -88,9 +89,9 @@ if __name__ == '__main__':
     os.system('cls')
 
     objeto_banco= Logica_Banco()
+    # objeto_banco.crear_conexion('base.db')
     objeto_banco.crear_tabela('Registro')
 
-    objeto_banco.insere_registro('Registro', 'Testando')
    
 
 

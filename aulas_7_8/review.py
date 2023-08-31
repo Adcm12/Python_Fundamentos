@@ -17,11 +17,11 @@ class Funciones(Logica_Banco):
         
         if numero1 == numero2:
 
-            print('Son iguales')
+            return True
 
         else:
-
-            print('No son iguales')
+            
+            return False
 
     def maior(self, numero1, numero2):
 
@@ -29,41 +29,49 @@ class Funciones(Logica_Banco):
 
             if numero1 > numero2:
 
-                print( f'{numero1} es mayor que {numero2}')            
+                self.mayor = f'{numero1} es mayor que {numero2}'            
 
             elif numero2 > numero1: 
-                print(f'{numero2} es mayor que {numero1}')
+
+                self.mayor = f'{numero2} es mayor que {numero1}'
 
             else: 
-                print("Los numeros son iguales, digite numero diferentes")
+                self.mayor = f"Los numeros {numero1} y {numero2} son iguales, digite numero diferentes"
+
+        return self.mayor
                 
     def menor(self, numero1, numero2):
 
         if self.eh_positivo(numero1, numero2) is True:
 
             if numero1 < numero2:
-                print(f'{numero1} es menor que {numero2}')
+                self.menorr = f'{numero1} es menor que {numero2}'
             
             elif numero2 < numero1: 
-                print(f'{numero2} es menor que {numero1}')
+                self.menorr= f'{numero2} es menor que {numero1}'
 
             else: 
-                print("Los numeros son iguales, digite numero diferentes")
-
+                self.menorr = f'{numero1} y {numero2} son iguales, digite numeros diferentes'
+        
+        return self.menorr
+                
     def verifica_si_es_par(self, numero):
 
         if numero > 0:
 
             if numero % 2 == 0:
 
-                print('El numero es par') 
+                self.par = f'El numero {numero} es par'
 
             else: 
-                print('El numero es impar') 
+
+                self.par = f'El numero {numero} es impar'
         
         else:
 
-            print('El numero es impar')
+            self.par = f'El {numero} numero es negativo'
+        
+        return self.par
 
     def mayor_de_la_lista(self, lista):
 
@@ -75,7 +83,8 @@ class Funciones(Logica_Banco):
 
                 variable = i
 
-        print(f'\nEl numero mayor de la lista es: {variable}')
+        self.mayor = f'\nEl numero mayor de la lista es: {variable}'
+        return self.mayor
 
     def cantidad_de_pares_en_lista(self, lista):
 
@@ -91,8 +100,9 @@ class Funciones(Logica_Banco):
             else: 
                 lista_impar.append(i)
 
-        print(f'\nLista de pares {lista_par}, cantidad: {len(lista_par)}')
-        print(f'\nLista de impares {lista_impar}, cantidad: {len(lista_impar)}')
+        self.lista1 = f'\nLista de pares {lista_par}, cantidad: {len(lista_par)}'
+        self.lista2 = f'\nLista de impares {lista_impar}, cantidad: {len(lista_impar)}'
+
 
     def menor_de_la_lista(self, lista):
 
@@ -203,10 +213,11 @@ class Funciones(Logica_Banco):
 
         while True:
 
-            registro_string = ''
 
             try:
 
+                registro_string = ' '
+                funciones = ' '
                 funcion_seleccionada = int(input(menu))
 
                 if funcion_seleccionada == 1:
@@ -214,35 +225,57 @@ class Funciones(Logica_Banco):
                     numero1 = int(input('\nDigite un numero: '))
                     numero2 = int(input('\nDigite otro numero: '))
                     
-                    if self.eh_positivo == True:
+                    if self.eh_positivo(numero1, numero2) == True:
 
-                        print('Es positivo')
-                        registro_string0 = f'(Eh positivo) {numero1} Es positivo '
-                    print(self.eh_positivo(numero1, numero2))
-
+                        print('Son positivos')
+                        registro_string = f'{numero1} y {numero2} son positivos '
+                        funciones = 'Eh_positivo'
 
                 elif funcion_seleccionada == 2:
 
                     numero1 = int(input('\nDigite un numero: '))
                     numero2 = int(input('Digite otro numero: '))
-                    self.son_iguales(numero1, numero2)
 
+                    if self.son_iguales(numero1, numero2) == True:
+
+                        print(f"Los numeros {numero1} y {numero2} son iguales ")
+                        registro_string = f'{numero1} y {numero2} son iguales '
+                    
+                    else:
+                        print(f"Los numeros {numero1} y {numero2} no son iguales ")
+                        registro_string = f'{numero1} no es igual a {numero2}'
+                    
+                    funciones = 'son_iguales'
+                                            
                 elif funcion_seleccionada == 3:
 
                     numero1 = int(input('\nDigite un numero: '))
                     numero2 = int(input('Digite otro numero: '))
+
                     self.maior(numero1, numero2)
+                    print(self.mayor)
+                    variable = self.mayor
+                    registro_string  = variable
+                    funciones = 'maior'
 
                 elif funcion_seleccionada == 4:
 
                     numero1 = int(input('\nDigite un numero: '))
                     numero2 = int(input('Digite otro numero: '))
-                    self.menor(numero1, numero2)
+
+                    self.menor(numero1, numero2)                    
+                    print(self.menorr)
+                    variable = self.menorr
+                    registro_string  = variable
+                    funciones = 'menor'
 
                 elif funcion_seleccionada == 5:
 
                     numero = int(input('\nDigite un numero: '))
                     self.verifica_si_es_par(numero)
+                    print(self.par)
+                    registro_string = self.par
+                    funciones = 'Verifica si es par'
                 
                 elif funcion_seleccionada == 6:
 
@@ -255,6 +288,9 @@ class Funciones(Logica_Banco):
                         lista.append(valor)
                     
                     self.mayor_de_la_lista(lista)
+                    print(self.mayor)
+                    registro_string = self.mayor
+                    funciones = 'Mayor de la lista'
                 
                 elif funcion_seleccionada == 7:
 
@@ -267,6 +303,9 @@ class Funciones(Logica_Banco):
                         lista.append(valor)
                     
                     self.cantidad_de_pares_en_lista(lista)
+                    print(self.lista1, self.lista2)
+                    funciones = 'Cantidad de pares e impares en una lista'
+                    registro_string = f'{self.lista1} -- {self.lista2}'
 
                 elif funcion_seleccionada == 8:
 
@@ -360,7 +399,8 @@ class Funciones(Logica_Banco):
                     except Exception as e:
                         print('Erro: ', e)
 
-                self.insere_registro('Registro', registro_string)
+                self.insere_registro('Registro', funciones, registro_string)
+
             except Exception as e:
                 print('Erro: ', e)
 
