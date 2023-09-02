@@ -103,7 +103,6 @@ class Funciones(Logica_Banco):
         self.lista1 = f'\nLista de pares {lista_par}, cantidad: {len(lista_par)}'
         self.lista2 = f'\nLista de impares {lista_impar}, cantidad: {len(lista_impar)}'
 
-
     def menor_de_la_lista(self, lista):
 
         variable = lista[0]
@@ -114,33 +113,37 @@ class Funciones(Logica_Banco):
 
                 variable = i
 
-        print(f'\nEl numero menor de la lista es: {variable}')
+        self.menor_lista = f'\nEl numero menor de la lista es: {variable}'
+        return self.menor_lista
 
     def calculadora(self, numero1, numero2, opcion):
+
+        self.operacion = ''
 
         if opcion == 1:
 
             resultado = numero1 + numero2
-            print(f'La suma es: {resultado}')
+            self.operacion = f'La suma es: {resultado}'
 
-            
         elif opcion == 2:
 
             resultado = numero1 - numero2
-            print(f'La resta es: {resultado}')
+            self.operacion = f'La resta es: {resultado}'
 
         elif opcion == 3:
 
             resultado = numero1 * numero2
-            print(f'La multiplicacion es: {resultado}')
+            self.operacion = f'La multiplicacion es: {resultado}'
 
         elif opcion == 4:
 
             resultado = numero1 / numero2
-            print(f'La division es: {resultado}')
+            self.operacion = f'La division es: {resultado}'
             
         else:
-            print('Digite una opcion valida')
+            self.operacion = 'Digite una opcion valida'
+        
+        return self.operacion 
 
     def buscar_letra(self, texto, letra):
 
@@ -160,14 +163,16 @@ class Funciones(Logica_Banco):
                 cantidad_num += 1
                         
         
-        print(f'La letra {letra}, aparece: {cantidad} veces, y la cantidad de numeros: {cantidad_num}')
-
+        self.letra = f'La letra {letra}, aparece: {cantidad} veces, y la cantidad de numeros: {cantidad_num}'
+        return self.letra
+    
     def verificar_salario(self, hora, valor, dias):
 
         salario = (hora * valor) * dias
 
-        print(f'El salario del colaborador por {dias} dias trabajados es: {round(salario, 2)}')
-
+        self.salario = f'El salario del colaborador por {dias} dias trabajados es: {round(salario, 2)}'
+        return self.salario
+    
     def buscar_item_en_la_lista(self, lista):
 
         int_cuenta = 0
@@ -188,7 +193,7 @@ class Funciones(Logica_Banco):
 
                 str_cuenta += 1
             
-        print(f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} \nCantidad de string: {str_cuenta} \nCantidad de int: {int_cuenta} \nCantidad de floats: {float_cuenta}')
+        self.total = f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} \nCantidad de string: {str_cuenta} \nCantidad de int: {int_cuenta} \nCantidad de floats: {float_cuenta}'
                 
 
     def main(self):
@@ -212,7 +217,6 @@ class Funciones(Logica_Banco):
         \nOpcion = '''
 
         while True:
-
 
             try:
 
@@ -318,6 +322,9 @@ class Funciones(Logica_Banco):
                         lista.append(valor)
                     
                     self.menor_de_la_lista(lista)
+                    print(self.menor_lista)
+                    registro_string = self.menor_lista
+                    funciones = 'Menor de una lista'
 
                 elif funcion_seleccionada == 9:
 
@@ -333,6 +340,10 @@ class Funciones(Logica_Banco):
                                 numero1 = int(input('\nDigite un numero: '))
                                 numero2 = int(input('Digite otro numero: '))
                                 self.calculadora(numero1, numero2, opcion)
+                                print(self.operacion)
+                                registro_string = self.operacion
+                                funciones = "Calculadora"
+                                self.insere_registro('Registro', funciones, registro_string)
 
                         except Exception as e:
                             print('Erro: ', e)
@@ -345,9 +356,14 @@ class Funciones(Logica_Banco):
                     if len(letra) == 1 and len(texto) >= 10:
 
                         self.buscar_letra(texto, letra)
+                        print(self.letra)
 
                     else:
-                        print("El texto debe tener por lo menos 10 caracteres")
+                        self.letra = "El texto debe tener por lo menos 10 caracteres"
+                        print(self.letra)
+
+                    registro_string = self.letra
+                    funciones = 'Buscar letra'
                 
                 elif funcion_seleccionada == 11:
 
@@ -358,6 +374,9 @@ class Funciones(Logica_Banco):
                         dias = int(input('Digite cuantos dias trabajo del mes: '))
 
                         self.verificar_salario(horas, valor, dias)
+                        print(self.salario)
+                        registro_string = self.salario
+                        funciones = "Verificar salario"
                         
                     except Exception as e:
                         print('Erro: ', e)
@@ -392,10 +411,16 @@ class Funciones(Logica_Banco):
                             print("\nLa lista cumple con los requisitos.")
 
                             self.buscar_item_en_la_lista(lista)
+                            print(self.total)
 
                         else:
-                            print("No cumple con los requisitos.")
-                    
+                            self.total = "No cumple con los requisitos."
+                            print(self.total)
+
+                        registro_string = self.total
+                        funciones = 'Buscar iten en la lista'
+
+                        
                     except Exception as e:
                         print('Erro: ', e)
 
