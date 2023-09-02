@@ -99,14 +99,14 @@ class Logica_Banco():
         except Exception as e:
             print(f'Erro: {str(e)}')
 
-    def retornar_cantidad_registro(self, nome_tabela):
+    def retornar_cantidad_registro(self):
         try:
             
             conn = sqlite3.connect("base.db")
 
             cursor = conn.cursor()
 
-            cursor.execute(f"SELECT COUNT(*) FROM {nome_tabela}")
+            cursor.execute(f"SELECT COUNT(*) FROM Registro")
 
             lineas = cursor.fetchone()[0]
 
@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
     objeto_banco= Logica_Banco()
     # objeto_banco.crear_conexion('base.db')
-    objeto_banco.retornar_cantidad_registro('Registro')
+    objeto_banco.retorna_ultimo_registtro_inserido()
 
    
 

@@ -214,7 +214,9 @@ class Funciones(Logica_Banco):
         \n10) Buscar letra
         \n11) Calcular salario
         \n12) Buscar Item en lista
-        \nOpcion = '''
+        \n13) --> Base de datos <---
+        \n14) Salir
+        \nEscoja la opcion: '''
 
         while True:
 
@@ -423,6 +425,31 @@ class Funciones(Logica_Banco):
 
                     except Exception as e:
                         print('Erro: ', e)
+
+                elif funcion_seleccionada == 13:
+            
+                    menu_2 = int(input('Seleccione una opncion \n1) Retorna ultimo registtro \n2) Deletar un registro \n3) Retornar cantidad de registro \n4)Break \nEscoje una opcion: '))
+                    
+                    if menu_2 == 1:
+
+                        self.retorna_ultimo_registtro_inserido()
+
+                    elif menu_2 == 2:
+
+                        id_lnha = int(input('\nInforme el id de la linea: '))
+                        self.deletar_registro(id_lnha)
+
+                    elif menu_2 == 3:
+
+                        self.retornar_cantidad_registro()
+                    
+                    elif menu_2 == 4:
+
+                        break
+
+                elif funcion_seleccionada == 14:
+
+                    break
 
                 self.insere_registro('Registro', funciones, registro_string)
 
