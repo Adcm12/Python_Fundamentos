@@ -41,10 +41,26 @@ class Logica_Banco():
         except Exception as e:
             print(f'Erro: {str(e)}')
 
-
     def retorna_ultimo_registtro_inserido(self):
+
         try:
-            ...
+
+            conn = sqlite3.connect("base.db")
+
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT * FROM Registro ORDER BY id DESC LIMIT 1")
+
+            resultados = cursor.fetchone()
+
+            conn.close()
+
+            id, funciones, registro, data = resultados
+
+            print(f'''\033[034mId:\033[0m {id} 
+                  \033[034m\nFunciones:\033[0m {funciones} 
+                  \033[034m\nRegistro:\033[0m {registro} 
+                  \033[034m\nData:\033[0m {data}''')
 
         except Exception as e:
             print(f'Erro: {str(e)}')
@@ -72,14 +88,31 @@ class Logica_Banco():
 
         try:
 
-            ...
+            conn = sqlite3.connect("base.db")
+            cursor = conn.cursor()
+
+            cursor.execute(f"DELETE FROM Registro WHERE id = {id_linha}")
+            conn.commit()
+            conn.close()
+            print('Datos eliminados con exito')
+
         except Exception as e:
             print(f'Erro: {str(e)}')
 
-
     def retornar_cantidad_registro(self, nome_tabela):
         try:
-            ...
+            
+            conn = sqlite3.connect("base.db")
+
+            cursor = conn.cursor()
+
+            cursor.execute(f"SELECT COUNT(*) FROM {nome_tabela}")
+
+            lineas = cursor.fetchone()[0]
+
+            conn.close()
+
+            print(f'Cantidad de registros en la tabla: {lineas}')
 
         except Exception as e:
             print(f'Erro: {str(e)}')
@@ -90,7 +123,7 @@ if __name__ == '__main__':
 
     objeto_banco= Logica_Banco()
     # objeto_banco.crear_conexion('base.db')
-    objeto_banco.crear_tabela('Registro')
+    objeto_banco.retornar_cantidad_registro('Registro')
 
    
 

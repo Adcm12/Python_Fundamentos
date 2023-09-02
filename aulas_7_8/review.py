@@ -193,7 +193,7 @@ class Funciones(Logica_Banco):
 
                 str_cuenta += 1
             
-        self.total = f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} \nCantidad de string: {str_cuenta} \nCantidad de int: {int_cuenta} \nCantidad de floats: {float_cuenta}'
+        self.total = f'\nCantidad en total de datos en total: {(int_cuenta + float_cuenta + str_cuenta)} Cantidad de string: {str_cuenta} Cantidad de int: {int_cuenta} Cantidad de floats: {float_cuenta}'
                 
 
     def main(self):
@@ -420,7 +420,7 @@ class Funciones(Logica_Banco):
                         registro_string = self.total
                         funciones = 'Buscar iten en la lista'
 
-                        
+
                     except Exception as e:
                         print('Erro: ', e)
 
